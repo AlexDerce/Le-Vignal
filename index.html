@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page de téléchargement</title>
     <style>
-        /* Styles généraux */
         body, html {
             margin: 0;
             padding: 0;
@@ -14,7 +13,6 @@
             height: 100%;
         }
 
-        /* Style de l'écran de démarrage */
         #start-screen {
             display: flex;
             flex-direction: column;
@@ -22,19 +20,20 @@
             justify-content: center;
             background-color: black;
             color: green;
-            font-size: 2em;
+            font-size: 5vw; /* Ajustement pour les petits écrans */
             height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 10;
+            text-align: center;
         }
 
         #start-button {
             margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 1.5em;
+            padding: 3vw 5vw; /* Ajusté pour s'adapter aux tailles d'écran mobiles */
+            font-size: 5vw;
             color: black;
             background-color: lime;
             border: none;
@@ -42,30 +41,28 @@
             cursor: pointer;
         }
 
-        /* Style de la vidéo d'arrière-plan */
         .video-background {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
             object-fit: cover;
         }
 
-        /* Style du bouton GO */
         .center-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            display: none; /* Masqué par défaut */
+            display: none;
         }
 
         .download-button {
-            font-size: 2em;
-            padding: 15px 30px;
+            font-size: 5vw;
+            padding: 3vw 6vw;
             color: white;
             background-color: rgba(0, 0, 0, 0.6);
             border: none;
@@ -82,39 +79,30 @@
 </head>
 <body>
 
-    <!-- Écran de démarrage avec message et bouton "OUI" -->
     <div id="start-screen">
         <div>Es-tu prête ?</div>
         <button id="start-button" onclick="showMainContent()">OUI</button>
     </div>
 
-    <!-- Vidéo en fond sonore -->
-    <video autoplay loop class="video-background" style="display: none;">
+    <video autoplay loop muted class="video-background" style="display: none;">
         <source src="videoplayback.mp4" type="video/mp4">
         Votre navigateur ne prend pas en charge les vidéos HTML5.
     </video>
 
-    <!-- Bouton "GO" centré, masqué par défaut -->
     <div class="center-button">
         <button class="download-button" onclick="downloadPDF()">GO</button>
     </div>
 
     <script>
-        // Fonction pour afficher le contenu principal avec la vidéo
         function showMainContent() {
-            // Masque l'écran de démarrage
             document.getElementById("start-screen").style.display = "none";
-
-            // Affiche la vidéo et lance le fond sonore
             document.querySelector(".video-background").style.display = "block";
 
-            // Affiche le bouton GO après un délai de 2 secondes
             setTimeout(() => {
                 document.querySelector(".center-button").style.display = "block";
             }, 2000);
         }
 
-        // Fonction pour télécharger le PDF
         function downloadPDF() {
             window.location.href = 'lettre.pdf';
         }
